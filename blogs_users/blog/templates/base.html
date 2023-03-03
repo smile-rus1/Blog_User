@@ -31,9 +31,22 @@
 
 <div class="row">
     <div class="leftcolumn">
-        <div>
-            {% block content %}
-            {% endblock %}
+        <div class="card">
+            <div id="message">
+
+                {% if messages %}
+                {% for message in messages %}
+                <div class="alert alert-{{ message.tags }}">
+                    {{ message }}
+                </div>
+                {% endfor %}
+                {% endif %}
+
+                <!--блок контента --->
+                {% block content %}
+                {% endblock %}
+                <!--конец блока контента --->
+            </div>
         </div>
     </div>
 
@@ -48,6 +61,7 @@
             <div class="card">
                 <ul class="right-nav">
                     <li class="red-block"><a href="#"><i>Ваши блоги</i></a></li>
+                    <li class="red-block"><a href="{% url 'add_new_post' %}"><i>Добавить новую запись</i></a></li>
                 </ul>
             </div>
         </div>
