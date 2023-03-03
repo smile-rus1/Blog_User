@@ -1,5 +1,6 @@
 from django import forms
 from django.contrib.auth.forms import UserChangeForm, UserCreationForm, AuthenticationForm
+from django.core.exceptions import ValidationError
 from django.core.validators import RegexValidator
 
 from .views import *
@@ -23,3 +24,28 @@ class RegisterUserForm(UserCreationForm):
 class LoginUserForm(AuthenticationForm):
     username = forms.CharField(label="Логин", widget=forms.TextInput(attrs={"class": "form-input"}))
     password = forms.CharField(label="Введите пароль", widget=forms.PasswordInput(attrs={"class": "form-input"}))
+
+
+class AddNewPostForm(forms.ModelForm):
+    class Meta:
+        model = Post
+        fields = ["title", "content"]
+
+        widgets = {
+            "title": forms.TextInput(),
+            "content": forms.Textarea(attrs={"cols": 60, "rows": 10}),
+        }
+
+    def clean_title(self):
+        title = self.cleaned_data["title"]
+        if len(title) > 30:
+            raise ValidationError("Название поста не может быть больше 30 слов")
+
+        return title
+
+    def clean_content(self):
+        content = self.cleaned_data["content"]
+        if len(content) > 500:
+            raise ValidationError("Вы привысили количество слов (MAX 500)")
+
+        return content
