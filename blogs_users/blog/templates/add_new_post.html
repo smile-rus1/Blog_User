@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="card">
+    <h1>{{ title }}</h1>
+
+    <form method="post">
+        {% csrf_token %}
+    {% for f in form %}
+    <p>
+        <label class="form-label" for="{{ f.id_for_label }}">
+                {{ f.label }}
+        </label>
+        {{ f }}
+
+    </p>
+    <div class="form-error">
+        {{ f.errors }}
+    </div>
+    {% endfor %}
+
+        <button type="submit" style="font-size : 20px; width: 30%; height: 50px" >
+            Добавить в ленту
+        </button>
+
+    </form>
+</div>
+{% endblock %}
