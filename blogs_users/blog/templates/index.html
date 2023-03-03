@@ -2,4 +2,21 @@
 
 {% block content %}
 
+{% if messages %}
+            {% for message in messages %}
+                {{ message }}
+            {% endfor %}
+        {% else %}
+            {{ form.non_field_errors }}
+    {% endif %}
+
+{% for p in posts %}
+    <p>Дата создания поста {{ p.date_create|date:"d-m-Y [H:i]" }}</p>
+    <h3>{{ p.title }}</h3>
+    <p> {{ p.content|linebreaks|truncatewords:70}} </p>
+    <p class="link-read-post"><a href="#">Посмотреть запись</a></p>
+
+{% endfor %}
+
+
 {% endblock %}
