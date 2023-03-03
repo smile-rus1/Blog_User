@@ -3,14 +3,19 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.views import LoginView
 from django.shortcuts import render, redirect
 from django.contrib import messages
+from django.template.context_processors import request
 from django.urls import reverse_lazy
 
 from .forms import *
 
 
 def index(request):
-    title = {"title": "home"}
-    return render(request, "index.html", context=title)
+    posts = Post.objects.all()
+    context = {
+        "title": "Главная страница",
+        "posts": posts,
+    }
+    return render(request, "index.html", context=context)
 
 
 def register(request):
@@ -35,6 +40,27 @@ def register(request):
     return render(request, "register.html", context=context)
 
 
+def add_new_post(request):
+    if request.method == "POST":
+        form = AddNewPostForm(request.POST)
+        if form.is_valid():
+            title = form.cleaned_data["title"]
+            content = form.cleaned_data["content"]
+
+            Post.objects.create(title=title, content=content, user_id=request.user.id)
+
+            return redirect("home")
+    else:
+        form = AddNewPostForm()
+
+    context = {
+        "title": "Новый пост",
+        "form": form,
+    }
+
+    return render(request, "add_new_post.html", context=context)
+
+
 class LoginUser(LoginView):
     form_class = LoginUserForm
     template_name = "login.html"
@@ -50,6 +76,7 @@ class LoginUser(LoginView):
 
 def logout_user(request):
     logout(request)
+    messages.success(request, f"Вы вышли с аккаунта")
     return redirect("home")
 
 
