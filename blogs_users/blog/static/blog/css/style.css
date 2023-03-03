@@ -129,3 +129,19 @@ ul.right-nav li a {
     color: 1184f7f5;
     display: block;
 }
+
+#message {
+    align: center;
+    background: 30a813f5;
+    display: block;
+}
+p.link-read-post {
+	text-align: right;
+}
+p.link-read-post a {
+	padding: 10px;
+	min-width: 100px;
+	background: #4d4d4df5;
+	color: #fff;
+	text-decoration: none;
+}
