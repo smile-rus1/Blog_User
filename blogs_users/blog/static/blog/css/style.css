@@ -1,0 +1,131 @@
+* {
+    box-sizing: border-box;
+}
+
+
+body {
+    font-family: Arial;
+    padding: 10px;
+    background: #cbd0d1;
+}
+
+
+.header {
+    padding: 30px;
+    font-size: 40px;
+    text-align: center;
+    background: #cbd0d1;
+}
+
+/* Create two unequal columns that floats next to each other */
+/* Left column */
+.leftcolumn {
+    float: left;
+    width: 75%;
+}
+
+/* Right column */
+.rightcolumn {
+    float: left;
+    width: 25%;
+    padding-left: 20px;
+}
+
+/* Fake image */
+.fakeimg {
+    background-color: #cbd0d1;
+    width: 100%;
+    padding: 20px;
+}
+
+/* Add a card effect for articles */
+.card {
+     background-color: white;
+     padding: 20px;
+     margin-top: 20px;
+}
+
+/* Clear floats after the columns */
+.row:after {
+    content: "";
+    display: table;
+    clear: both;
+}
+
+/* Footer */
+footer {
+ position: sticky!important;
+ top: 100%;
+ padding-top:25px;
+ padding-bottom:25px;
+ border-top:1px solid #ff7f7ff5;
+}
+
+/* Responsive layout - when the screen is less than 800px wide, make the two columns stack on top of each other instead of next to each other */
+@media screen and (max-width: 800px) {
+    .leftcolumn, .rightcolumn {
+        width: 100%;
+        padding: 0;
+    }
+}
+#navbar ul{
+        display: none;
+        background-color: #4c5052;
+        position: absolute;
+        top: 100%;
+      }
+      #navbar li:hover ul { display: block; }
+      #navbar, #navbar ul{
+        margin: 0;
+        padding: 0;
+        list-style-type: none;
+      }
+      #navbar {
+        height: 50px;
+        background-color: #666;
+        padding-left: 20px;
+        min-width: 470px;
+      }
+      #navbar li {
+        float: left;
+        position: relative;
+        height: 80%;
+        margin: 10px 20px 0 10px;
+      }
+      #navbar li a {
+        display: block;
+        padding: 6px;
+        width: 100px;
+        color: #fff;
+        text-decoration: none;
+        text-align: center;
+      }
+      #navbar ul li { float: none; }
+
+      #navbar ul li:hover { background-color: #246c82; }
+
+#navbar li.last {
+    float: right;
+}
+
+ul.right-nav {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    width: 200px;
+    background-color: #fff;
+    padding-left:1em
+}
+
+ul.right-nav li a {
+    display: block;
+    color: #292a2bf5;
+    padding: 10px 16px;
+    text-decoration: none;
+    padding:1em
+}
+.red-block {
+    background: 292a2bf5;
+    color: 1184f7f5;
+    display: block;
+}
