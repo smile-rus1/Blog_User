@@ -1,7 +1,8 @@
 from django.contrib.auth import logout
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.views import LoginView
-from django.shortcuts import render, redirect
+from django.http import HttpResponse, Http404
+from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib import messages
 from django.template.context_processors import request
 from django.urls import reverse_lazy
@@ -18,6 +19,17 @@ def index(request):
     return render(request, "index.html", context=context)
 
 
+def show_post(request, post_id):
+    post = Post.objects.filter(pk=post_id)
+
+    context = {
+        'post': post,
+        'title': 'Пост',
+    }
+
+    return render(request, "show_post.html", context=context)
+
+
 def register(request):
     if request.method == "POST":
         form = RegisterUserForm(request.POST)
@@ -27,8 +39,7 @@ def register(request):
             messages.success(request, f"Создан аккаунт {username}")
 
             return redirect("login")
-        else:
-            pass
+
     else:
         form = RegisterUserForm()
 
@@ -46,6 +57,7 @@ def add_new_post(request):
         if form.is_valid():
             title = form.cleaned_data["title"]
             content = form.cleaned_data["content"]
+            # slug = form.cleaned_data["title"]
 
             Post.objects.create(title=title, content=content, user_id=request.user.id)
 
