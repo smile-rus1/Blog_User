@@ -2,22 +2,16 @@
 
 {% block content %}
 
-{% if messages %}
-            {% for message in messages %}
-                {{ message }}
-            {% endfor %}
-        {% else %}
-            {{ form.non_field_errors }}
-    {% endif %}
 
 {% for p in posts %}
 
 <div class="card">
     <p style="font-size:24px; font-family: Cursive">Добавил пост {{ p.user.username }}</p>
-    <p>Дата создания поста {{ p.date_create|date:"d-m-Y [H:i]" }}</p>
     <h3>{{ p.title }}</h3>
     <p> {{ p.content|linebreaks|truncatewords:70}} </p>
-    <p class="link-read-post"><a href="#">Посмотреть запись</a></p>
+    <br>
+    <p id="date">Дата создания поста {{ p.date_create|date:"d-m-Y [H:i]" }}</p>
+    <p class="link-read-post"><a href="{{ p.get_absolute_url }}">Посмотреть запись</a></p>
 </div>
 
 {% endfor %}
