@@ -10,6 +10,17 @@ from django.urls import reverse_lazy
 from .forms import *
 
 
+def my_posts(request):
+    my_post = Post.objects.filter(user_id=request.user.id)
+
+    context = {
+        "title": "Ваши посты",
+        "my_post": my_post,
+    }
+
+    return render(request, "my_posts.html", context=context)
+
+
 def index(request):
     posts = Post.objects.all()
     context = {
