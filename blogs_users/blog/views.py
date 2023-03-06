@@ -8,6 +8,7 @@ from django.template.context_processors import request
 from django.urls import reverse_lazy
 
 from .forms import *
+from .models import *
 
 
 def my_posts(request):
