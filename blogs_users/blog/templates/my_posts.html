@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+{% for mp in my_post %}
+<div class="card">
+    <p style="font-size:24px; font-family: Cursive">Добавил пост {{ mp.user.username }}</p>
+    <h3>{{ mp.title }}</h3>
+    <p> {{ mp.content|linebreaks|truncatewords:70}} </p>
+    <br>
+    <p id="date">Дата создания поста {{ mp.date_create|date:"d-m-Y [H:i]" }}</p>
+    <p class="link-read-post"><a href="{{ mp.get_absolute_url }}">Посмотреть запись</a></p>
+</div>
+{% endfor %}
+
+{% endblock %}
