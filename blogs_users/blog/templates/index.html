@@ -11,7 +11,12 @@
     <p> {{ p.content|linebreaks|truncatewords:70}} </p>
     <br>
     <p id="date">Дата создания поста {{ p.date_create|date:"d-m-Y [H:i]" }}</p>
-    <p class="link-read-post"><a href="{{ p.get_absolute_url }}">Посмотреть запись</a></p>
+    <p class="link-read-post">
+        <span>
+            <a href="#">Комментировать запись</a>
+            <a href="{{ p.get_absolute_url }}">Посмотреть запись</a>
+        </span>
+    </p>
 </div>
 
 {% endfor %}
