@@ -8,7 +8,7 @@ from django.template.context_processors import request
 from django.urls import reverse_lazy
 
 from .forms import *
-from .models import *
+# from .models import *
 
 
 def my_posts(request):
@@ -24,10 +24,12 @@ def my_posts(request):
 
 def index(request):
     posts = Post.objects.all()
+
     context = {
         "title": "Главная страница",
         "posts": posts,
     }
+
     return render(request, "index.html", context=context)
 
 

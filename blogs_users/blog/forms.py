@@ -49,3 +49,14 @@ class AddNewPostForm(forms.ModelForm):
             raise ValidationError("Вы привысили количество слов (MAX 500)")
 
         return content
+
+
+class ChangePostForm(forms.ModelForm):
+    title = forms.CharField(widget=forms.TextInput(attrs={"class": "form-input"}))
+    content = forms.CharField(widget=forms.Textarea(attrs={"class": "form-input"}))
+
+    class Meta:
+        model = Post
+        fields = ("title", "content")
+
+
